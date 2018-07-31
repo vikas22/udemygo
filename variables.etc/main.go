@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import "strconv"
+import (
+	"fmt"
+	"runtime"
+	"strconv"
+)
 
 const (
 	A = 5
@@ -63,6 +66,56 @@ func main() {
 	fmt.Println("A =", A)
 	fmt.Println("B =", B)
 	fmt.Println("C =", C)
+
+	if i = inc(); i < 0 {
+		fmt.Println("i is negative")
+	} else if i == 0 {
+		fmt.Println("i is zero")
+	} else {
+		fmt.Println("i is positive")
+	}
+
+	switch i = inc(); {
+	case i < 0:
+		fmt.Println("i is negative")
+	case i == 0:
+		fmt.Println("i is zero")
+	default:
+		fmt.Println("i is positive")
+	}
+	// defer
+	defer fmt.Println("Defer last execution statement")
+
+	switch os := runtime.GOOS; os {
+	//experimental
+	case "osx":
+	case "darwin":
+		fmt.Println("Mac OSX")
+	case "linux":
+		fmt.Println("Linux")
+	default:
+		fmt.Println("Unknown")
+	}
+
+	//loops
+
+	for k := 10; k > 0; k-- {
+		fmt.Print(k)
+	}
+	fmt.Println()
+
+	n = 1
+	for n < 10 {
+		n++
+	}
+
+	fmt.Println(n)
+
+	for i = 1; i <= 4; i++ {
+		defer fmt.Println("Defer call =", i)
+	}
+
+	fmt.Println("End of Function")
 }
 
 func change(i *int) {
